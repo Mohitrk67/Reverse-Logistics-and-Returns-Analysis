@@ -189,8 +189,6 @@ Reverse-Logistics-and-Returns-Analysis/
 
 ## Dashboard Screenshots
 
-Add real dashboard screenshots after exporting them from Power BI:
-
 ![Dashboard Overview](images/dashboard_overview.png)
 
 ![Return Reasons](images/return_reasons.png)
