@@ -1,161 +1,188 @@
 # Reverse Logistics and Returns Analysis
 
-Supply chain analytics project using Python, SQL, and Power BI to analyze e-commerce returns, identify return drivers, measure cost and sustainability impact, and support reverse logistics decision-making.
+## One-Line Summary
 
-## Project Overview
-
-This project analyzes e-commerce order and return data to understand how product returns affect operations, cost, processing time, packaging waste, and CO2 emissions. The goal is to turn reverse logistics data into clear operational insights that can help business teams prioritize improvement opportunities.
-
-The project is designed as a practical Supply Chain Analytics and Operations Analytics case study for roles involving business intelligence, data analytics, and decision support.
+A supply chain analytics case study using Python, SQL, and Power BI to analyze e-commerce returns, quantify reverse logistics impact, and support operational improvement decisions.
 
 ## Business Problem
 
-Returns are a major challenge in e-commerce operations. They increase logistics costs, consume warehouse and support capacity, create packaging waste, and add emissions through reverse transportation and processing.
+Product returns are a major challenge in e-commerce operations. High return volumes increase reverse logistics costs, extend processing time, affect customer satisfaction, add warehouse workload, create packaging waste, and contribute to avoidable sustainability impacts.
 
-This project asks:
+For supply chain teams, returns are not only a customer service issue. They influence inventory recovery, fulfillment planning, warehouse capacity, product quality feedback, margin protection, and sustainability performance.
 
-How can an e-commerce business use returns data to identify high-return categories, understand return reasons, measure cost and sustainability impact, and make better reverse logistics decisions?
+## Project Objective
 
-## Why Reverse Logistics Matters
+The objective of this project is to use data analytics to understand return patterns, identify high-return product categories and reasons, measure cost and processing impact, and summarize reverse logistics KPIs through SQL analysis and a Power BI dashboard.
 
-Reverse logistics is not only a customer service issue. It directly affects:
+The project is designed as a practical business intelligence case study for e-commerce reverse logistics and returns management.
 
-- Operational cost
-- Inventory recovery
-- Warehouse workload
-- Customer experience
-- Product quality feedback
-- Sustainability performance
-- Profitability by product category
+## Why This Project Matters in Supply Chain Management
 
-Analyzing return patterns helps teams separate preventable returns from expected returns and focus improvement efforts where the impact is highest.
+This project connects directly to core supply chain management areas:
+
+- Reverse logistics: Measures returned order volume, return reasons, and return processing behavior.
+- Return rate analysis: Identifies which product categories contribute most to returns.
+- Cost control: Quantifies return cost impact by category and overall returned orders.
+- Operational efficiency: Reviews return processing time and operational workload.
+- Sustainability: Tracks CO2 emissions, packaging waste, CO2 saved, and waste avoided fields available in the dataset.
+- Inventory and fulfillment planning: Highlights categories and regions that may need closer operational review.
+- Business intelligence: Converts raw and processed data into analysis-ready outputs for SQL and Power BI reporting.
 
 ## Dataset Overview
 
-The dataset contains 5,000 e-commerce order records with fields related to:
+The repository includes two CSV files:
 
-- Order, product, and customer details
-- Product category and order value
-- Return status and return reason
-- Days to return
-- Return cost and profit/loss impact
-- CO2 emissions
-- Packaging waste
-- Year and month fields for trend analysis
+- `data/raw/returns_sustainability_dataset.csv`
+- `data/processed/returns_cleaned_for_sql_powerbi.csv`
 
-The current repository includes:
+The processed dataset contains 5,000 e-commerce order records and 27 fields. The available fields include:
 
-- Raw/source dataset: `data/raw/returns_sustainability_dataset.csv`
-- Cleaned dataset for SQL and Power BI: `data/processed/returns_cleaned_for_sql_powerbi.csv`
+- Order and product information: `order_id`, `product_id`, `order_date`, `product_category`, `product_price`, `order_quantity`, `order_value`
+- Customer information: `user_id`, `user_age`, `user_gender`, `user_location`
+- Fulfillment and payment information: `shipping_method`, `payment_method`, `discount_applied`, `discount_bin`
+- Return information: `return_status`, `return_reason`, `days_to_return`, `returned`
+- Cost and profit fields: `return_cost`, `profit_loss`
+- Sustainability fields: `co2_emissions`, `packaging_waste`, `co2_saved`, `waste_avoided`
+- Time fields: `order_month`, `order_year`
 
-Note: the available source file in the original repository was already in a cleaned/enriched format, so it is preserved as the raw project input and exported again as the processed analysis file.
+Note: The repository does not include separate data documentation explaining whether the dataset is real, synthetic, or sample data. To be added manually.
 
-## Tools And Technologies
+## Tools and Technologies
 
-- Python: data cleaning, transformation, validation, and exploratory analysis
-- Pandas and NumPy: data preparation and feature engineering
-- SQL: operational aggregations and business analysis queries
-- Power BI: dashboard design and executive visual reporting
-- GitHub: project documentation and portfolio presentation
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- SQL
+- Power BI
+- Jupyter Notebook
+- GitHub
 
-## Project Workflow
+## Key Business Questions
 
-```text
-Raw returns dataset
--> Python cleaning and feature engineering
--> Processed CSV for SQL and Power BI
--> SQL analysis for operational metrics
--> Power BI dashboard for business reporting
--> README summary with insights and recommendations
-```
-
-## Key Business Questions Answered
-
-- What is the overall return rate?
-- Which product categories generate the most returns?
-- Which categories have the highest return rate?
-- What are the most common return reasons?
+- What is the overall return rate for the e-commerce order dataset?
+- Which product categories generate the highest number of returns?
+- Which product categories have the highest return rates?
+- What are the most common reasons for returned products?
 - Which categories create the highest return cost impact?
-- How long does return processing take?
-- What sustainability metrics are associated with returned orders?
-- How has the return rate changed over time?
+- Which categories have longer return processing times?
+- What sustainability impact is associated with returned products?
+- How can return analytics support cost control, warehouse planning, and reverse logistics improvements?
+
+## Methodology
+
+1. Data collection/import from the available CSV dataset.
+2. Data cleaning and standardization in Python.
+3. Exploratory data analysis for returns, categories, reasons, locations, shipping methods, payment methods, and discounts.
+4. SQL analysis for operational aggregations and KPI-style queries.
+5. KPI calculation for total orders, returned orders, return rate, return cost, and processing time.
+6. Dashboard development in Power BI using the processed CSV.
+7. Insight generation from verified dataset outputs.
+8. Business recommendation development for reverse logistics improvement.
 
 ## Python Analysis Summary
 
-The notebook prepares the dataset for analysis by:
+The notebook `notebooks/Reverse_Logistics_Analysis.ipynb` prepares and analyzes the returns dataset. It performs the following work:
 
-- Loading the returns dataset from `data/raw/returns_sustainability_dataset.csv`
-- Cleaning and standardizing return-related fields
-- Creating a boolean `returned` flag
-- Extracting order year and month fields
-- Preparing return cost, processing time, emissions, and packaging waste fields
-- Exporting the processed dataset to `data/processed/returns_cleaned_for_sql_powerbi.csv`
-
-Notebook:
-
-```text
-notebooks/Reverse_Logistics_Analysis.ipynb
-```
+- Loads the raw returns dataset from `data/raw/returns_sustainability_dataset.csv`
+- Standardizes column names to lowercase
+- Checks dataset shape, data types, and missing values
+- Creates a boolean `returned` flag from `return_status`
+- Converts `order_date` into date format
+- Creates `order_month` and `order_year` fields for trend analysis
+- Performs consistency checks on non-returned orders and return costs
+- Calculates core KPIs such as total orders, returned orders, return rate, total return cost, and average return cost
+- Reviews return reasons, product categories, user locations, monthly return trends, shipping methods, payment methods, and discount bins
+- Exports the processed dataset to `data/processed/returns_cleaned_for_sql_powerbi.csv`
 
 ## SQL Analysis Summary
 
-The SQL script includes beginner-friendly sections for:
+The SQL file `sql/reverse_logistics_analysis.sql` contains business analysis queries for a table named `returns_raw`. The queries cover:
 
 - Total orders and returned orders
 - Overall return rate
-- Returns by product category
-- Returns by return reason
-- Return cost impact
-- Processing time analysis
-- Sustainability metrics
+- Returns and return rate by product category
+- Return reasons among returned orders
+- Return cost impact by product category
+- Return processing time by product category
+- Sustainability metrics by product category
 - Yearly return trend
 
-SQL file:
-
-```text
-sql/reverse_logistics_analysis.sql
-```
+These queries are intended to be run after loading `data/processed/returns_cleaned_for_sql_powerbi.csv` into a SQL database table named `returns_raw`.
 
 ## Power BI Dashboard Summary
 
-The Power BI dashboard is designed to summarize reverse logistics performance through:
+The repository includes a Power BI file:
+
+`dashboard/Reverse_Logistics_Analytics.pbix`
+
+The dashboard is intended to communicate reverse logistics performance through KPIs and visuals such as:
 
 - Total orders, returned orders, and return rate
-- Return trend over time
-- Returns by product category
+- Category-level return performance
 - Return reason breakdown
+- Regional or location-based return patterns
+- Return processing time
 - Return cost impact
-- Sustainability-related metrics
+- Sustainability metrics such as CO2 emissions and packaging waste
+- Operational insights for reverse logistics decision-making
 
-Dashboard file:
+Dashboard screenshots to be added manually.
 
-```text
-dashboard/Reverse_Logistics_Analytics.pbix
-```
+![Dashboard Overview](images/dashboard_overview.png)
+
+![Return Analysis](images/return_analysis.png)
+
+![Cost and Sustainability](images/cost_sustainability.png)
 
 ## Key Insights
 
-The following insights were recalculated from the dataset:
+The following insights are supported by the available processed dataset:
 
 - Total orders: 5,000
 - Returned orders: 1,450
 - Overall return rate: 29.0%
-- Clothing had the highest number of returns, with 661 returned orders.
-- Clothing had the highest category return rate, at approximately 37.4%.
-- Top return reasons were Defective, Changed Mind, Wrong Item, and Size Issue.
-- Clothing generated the highest return cost impact, followed by Electronics.
+- Clothing generated the highest number of returns, with 661 returned orders.
+- Clothing had the highest category return rate, at approximately 37.43%.
+- The most common return reasons were Defective, Changed Mind, Wrong Item, and Size Issue.
+- Clothing generated the highest total return cost impact, followed by Electronics.
 - Average return processing time was highest for Electronics, followed closely by Clothing.
-- Return rate increased from about 26.5% in 2022 to 31.4% in 2024, then dropped to about 28.3% in 2025.
+- Return rate increased from 26.48% in 2022 to 31.36% in 2024, then decreased to 28.33% in 2025.
+
+Dashboard-specific findings: To be added manually after final dashboard review.
 
 ## Business Recommendations
 
 - Investigate high-return categories, especially Clothing, to identify product quality, sizing, description, or expectation gaps.
-- Track return reasons by category to separate preventable returns from unavoidable returns.
-- Monitor return cost impact by product category to prioritize operational improvement efforts.
-- Use processing time trends to improve reverse logistics turnaround and reduce operational backlog.
-- Review Electronics and Clothing processing workflows because they show higher average return processing times.
-- Track packaging waste and CO2 metrics to connect return reduction with sustainability goals.
-- Use yearly return trends to monitor whether return reduction initiatives are improving operational performance.
+- Improve product information, images, sizing guidance, and fit details to reduce avoidable returns.
+- Track return reasons by category to separate preventable returns from expected customer behavior.
+- Prioritize warehouse resources for categories with higher return volumes or longer processing times.
+- Monitor regional or location-based return patterns to identify fulfillment, delivery, or customer experience issues.
+- Review Electronics and Clothing return workflows because they show higher average processing times.
+- Track packaging waste, CO2 emissions, CO2 saved, and waste avoided to connect return reduction with sustainability goals.
+- Use yearly return trends to evaluate whether return reduction initiatives improve operational performance over time.
+
+## Limitations
+
+- The dataset may not represent all e-commerce operations.
+- The repository does not include source documentation confirming whether the dataset is real, synthetic, or sample data.
+- External factors such as delivery partners, supplier quality, product descriptions, customer behavior, and return policy design may influence returns.
+- Analysis depends on the available fields and data quality in the CSV files.
+- Financial impact estimates should be validated with real business cost data before being used for operational decisions.
+- Power BI visuals require Power BI Desktop to open and review the `.pbix` file.
+- More advanced root-cause analysis would require additional fields such as SKU-level details, supplier information, fulfillment center, delivery SLA, customer complaints, and inspection outcomes.
+
+## Future Improvements
+
+- Add dashboard screenshots to the `images/` folder.
+- Add a data dictionary in the `docs/` folder.
+- Add predictive modeling for return risk.
+- Add customer segmentation analysis.
+- Add supplier, SKU, and product quality analysis.
+- Add inventory recovery and fulfillment center impact analysis.
+- Add automated Power BI dashboard refresh.
+- Add a Streamlit app if an interactive web version is useful.
+- Add scenario analysis for cost reduction and sustainability improvement.
 
 ## Folder Structure
 
@@ -175,47 +202,60 @@ Reverse-Logistics-and-Returns-Analysis/
 |-- docs/
 |-- images/
 |-- README.md
+|-- requirements.txt
 |-- .gitignore
 |-- LICENSE
 ```
 
 ## How To Review The Project
 
-1. Start with this README to understand the business problem and project workflow.
-2. Open `notebooks/Reverse_Logistics_Analysis.ipynb` from the project root and review the Python cleaning and analysis steps.
+1. Start with this README to understand the business problem and workflow.
+2. Open `notebooks/Reverse_Logistics_Analysis.ipynb` to review the Python cleaning and analysis steps.
 3. Review `sql/reverse_logistics_analysis.sql` for SQL-based operational analysis.
 4. Open `dashboard/Reverse_Logistics_Analytics.pbix` in Power BI Desktop to explore the dashboard.
-5. Use the dashboard and SQL outputs together to interpret category-level return patterns, cost impact, and sustainability metrics.
+5. Add dashboard screenshots to the `images/` folder using the placeholder names shown above.
 
-## Dashboard Screenshots
+## Academic CV Project Description
 
-![Dashboard Overview](images/dashboard_overview.png)
+Title:
+Reverse Logistics and Returns Analysis for E-Commerce Operations
 
-![Return Reasons](images/return_reasons.png)
+Duration:
+To be added manually
 
-![Category Returns](images/category_returns.png)
+Technologies:
+Python, Pandas, NumPy, Matplotlib, SQL, Power BI, Jupyter Notebook, GitHub
 
-![Cost Impact](images/cost_impact.png)
+Objective:
+Analyze e-commerce return patterns to understand the operational, cost, and sustainability impact of reverse logistics. Use Python, SQL, and Power BI to convert returns data into supply chain KPIs, dashboard visuals, and business recommendations.
 
-![Sustainability Metrics](images/sustainability_metrics.png)
+Brief Description:
+Developed a supply chain analytics case study focused on reverse logistics and e-commerce returns management. The project analyzes order, product, customer, return, cost, processing time, and sustainability fields to identify return drivers, evaluate category-level return behavior, and support operational decision-making. The final workflow combines Python-based data preparation, SQL aggregation queries, and Power BI dashboarding to present reverse logistics insights in a business intelligence format suitable for supply chain planning and performance improvement.
 
-## Limitations
+Individual Role:
 
-- The dataset appears to be a sample or synthetic e-commerce returns dataset, not live company data.
-- The analysis supports operational decision-making but does not prove that returns were reduced in a real business.
-- The original repository did not include a separate uncleaned source dataset, so the available dataset is used as the raw project input.
-- Power BI visuals require Power BI Desktop to open and review the `.pbix` file.
-- More advanced root-cause analysis would require additional fields such as product descriptions, supplier details, fulfillment center, customer complaints, and product quality inspection results.
+- Cleaned and prepared the e-commerce returns dataset for analysis.
+- Performed Python-based exploratory analysis of return rates, return reasons, product categories, locations, shipping methods, payment methods, and discount patterns.
+- Designed KPI calculations for total orders, returned orders, return rate, return cost, and processing time.
+- Wrote SQL queries for operational return analysis, category-level aggregation, cost impact, processing time, sustainability metrics, and yearly trends.
+- Developed a Power BI dashboard file for reverse logistics reporting and business intelligence review.
+- Converted analytical findings into supply chain-focused insights and business recommendations.
 
-## Future Improvements
+Key Findings:
 
-- Add dashboard screenshots to the `images/` folder.
-- Add supplier, fulfillment center, and SKU-level analysis.
-- Build a return risk scoring model.
-- Add cohort analysis by customer segment and product category.
-- Create more detailed sustainability KPIs for avoided emissions and packaging reduction opportunities.
-- Connect the dataset to a SQL database and document the loading process.
-- Add a Power BI dashboard walkthrough or PDF export.
+- Total orders: 5,000
+- Returned orders: 1,450
+- Overall return rate: 29.0%
+- Clothing had the highest return volume and highest category return rate in the dataset.
+- To be added manually after final dashboard review.
+
+Learning Outcomes:
+
+- Built practical understanding of reverse logistics analytics and e-commerce returns management.
+- Learned how to design operational KPIs for returns, cost impact, processing time, and sustainability.
+- Applied Python and SQL to prepare, validate, and summarize supply chain analytics data.
+- Practiced Power BI dashboarding for business intelligence and executive reporting.
+- Strengthened supply chain decision-making by connecting data analysis to operational recommendations.
 
 ## Author
 
